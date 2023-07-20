@@ -74,6 +74,7 @@ on:
         options:
           - '["Linux", "gen12"]'
           - '["amdgpu"]'
+          - '["cuda"]'
       image:
         description: |
           Use option ending with ":build" for AMDGPU, ":latest" for the rest.
@@ -88,6 +89,7 @@ on:
         options:
           - '-u 1001 --device=/dev/dri --privileged --cap-add SYS_ADMIN'
           - '-u 1001 --device=/dev/dri --device=/dev/kfd --privileged --cap-add SYS_ADMIN'
+          - '-u 1001 --gpus all'
       target_devices:
         type: choice
         options:
@@ -96,6 +98,7 @@ on:
           - 'opencl:acc'
           - 'ext_oneapi_level_zero:gpu'
           - 'ext_oneapi_hip:gpu'
+          - 'ext_oneapi_cuda:gpu'
           - 'ext_intel_esimd_emulator:gpu'
       tests_selector:
         type: choice
