@@ -2676,11 +2676,20 @@ RValue CodeGenFunction::EmitBuiltinExpr(const GlobalDecl GD, unsigned BuiltinID,
     case Builtin::BI__builtin_sqrtf:
     case Builtin::BI__builtin_sqrtf16:
     case Builtin::BI__builtin_sqrtl:
+<<<<<<< HEAD
     case Builtin::BI__builtin_sqrtf128:
       return RValue::get(emitUnaryMaybeConstrainedFPBuiltin(
           *this, E, Intrinsic::sqrt, Intrinsic::experimental_constrained_sqrt,
           Intrinsic::fpbuiltin_sqrt));
 
+=======
+    case Builtin::BI__builtin_sqrtf128: {
+      llvm::Value *Call = emitUnaryMaybeConstrainedFPBuiltin(
+          *this, E, Intrinsic::sqrt, Intrinsic::experimental_constrained_sqrt);
+      SetSqrtFPAccuracy(Call);
+      return RValue::get(Call);
+    }
+>>>>>>> bac2a075408377a8aa41f6626b17bb3e471221f3
     case Builtin::BItrunc:
     case Builtin::BItruncf:
     case Builtin::BItruncl:
